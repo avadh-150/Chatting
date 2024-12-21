@@ -1,0 +1,148 @@
+<%- include("layout/header.ejs"); %>
+<h1></h1>
+<h2 class="mb-4">Welcome Back <%= user.name %>
+</h2>
+
+<div class="row">
+  <div class="col-md-4">
+    <ul class="list-group">
+      <% if(users.length> 0)
+          {
+          for(let i=0;i<users.length;i++){ %>
+      <li class="list-group-item list-group-item-dark users-list" style="cursor: pointer;" data-id="<%= users[i]['_id']%>">
+        <img src="<%= users[i]['image']%>" alt="" class="img-1" width="50px" height="50px">
+        <%= users[i]['name'] %>
+
+        <% 
+              if(users[i]['is_online'] == 1){
+                %>
+        <sup class="on_status" id="<%= users[i]['_id']%>-status">Online</sup>
+        <%
+              }
+              else{
+                %>
+        <sup class="off_status" id="<%= users[i]['_id']%>-status">Offline</sup>
+        <%
+              
+              }
+              %>
+
+      </li>
+      <% } } %>
+    </ul>
+
+  </div>
+  <div class="col-md-7">
+    <h2 class="start">Click to start chat</h2>
+    <div class="chat-section">
+
+      <!--inside chat box messages      -->
+      <div id="chat-box">
+
+      </div>
+
+      <form action="" id="chat-form">
+        <input type="text" name="message" class="border" placeholder="Enter the Message" id="msg">
+        <input type="submit" name="" value="Send" class="btn btn-primary" id="">
+      </form>
+    </div>
+  </div>
+
+
+
+</div>
+<script src="../public/js/jquery-3.7.1.min.js"></script>
+
+<script>
+
+let sender_id = '<%= user._id %>'; // Obtain sender_id from server-side template
+let receiver_id; 
+
+const socket = io('/user-namespace', {
+  auth: {
+    token:  '<%= user._id %>'
+  }
+});
+
+$(document).ready(function() {
+  $('.users-list').click(function() {
+    let userID = $(this).attr('data-id');
+    receiver_id=userID;
+
+    console.log(receiver_id); 
+    $('.start').hide();
+    $('.chat-section').show();
+  });
+
+  
+  });
+
+// chat save of user
+$('#chat-form').submit(function(e) {
+    e.preventDefault();
+    let message = $('#msg').val();
+
+  if (!message) {
+    alert('Please enter a message.');
+    return;
+  }
+    if (!receiver_id) {
+    alert('Please select a user to chat with.');
+    return;
+  }
+
+    $.ajax({
+      url: '/save-chat',
+      type: 'POST',
+      data: {
+        sender_id: sender_id,
+        receiver_id: receiver_id,
+        message: message
+      },
+      success: function(response) {
+        if (response.success) {
+          console.log(response.data.receiver_id);
+          $('#msg').val('');
+
+          // Display message with timestamp
+          let chat = response.data.message;
+          let html = `
+            <div class="current-chat">
+              <h5>`+chat+`</h5>
+             
+            </div>
+          `;
+          $('#chat-box').append(html); 
+          socket.emit('newChat',response.data);
+        } else {
+          alert(response.msg);
+        }
+      }
+    });
+  });
+
+  socket.on('loadChat', function(data){
+    if(sender_id == data.receiver_id && receiver_id == data.sender_id){
+
+      let html = `
+      <div class="distance-chat">
+        <h5>`+data.message+`</h5>
+        
+        </div>
+        `;
+        $('#chat-box').append(html); 
+      }
+      });
+    
+      
+    // Update user status
+        socket.on('online', (data) => {
+          $('#' + data.user_id + '-status').text('Online').removeClass('off_status').addClass('on_status');
+        });
+
+        socket.on('offline', (data) => {
+          $('#' + data.user_id + '-status').text('Offline').removeClass('on_status').addClass('off_status');
+        });
+</script>
+
+<%- include("layout/footer.ejs"); %>

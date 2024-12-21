@@ -1,0 +1,110 @@
+
+<%- include("layout/header.ejs"); %>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Users Table</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f9;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      background-color: #fff;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    th,
+    td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #4CAF50;
+      color: white;
+      text-transform: uppercase;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+
+    tr:hover {
+      background-color: #ddd;
+    }
+
+    td img {
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      object-fit: cover;
+    }
+
+    td,
+    th {
+      font-size: 14px;
+    }
+
+    .no-data {
+      text-align: center;
+      color: #888;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>User List</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Image</th>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Password</th>
+        <th>Is Online</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if (users.length > 0) { %>
+        <% for (let i = 0; i < users.length; i++) { %>
+          <tr>
+            <td>
+              <img src="<%=users[i]['image']%>" alt="" class="img-1" width="50px">
+            </td>
+            <td><%= users[i]['id'] %></td>
+            <td><%= users[i]['name'] %></td>
+            <td><%= users[i]['email'] %></td>
+            <td><%= users[i]['password'] %></td>
+            <td><%= users[i]['is_online']%></td>
+            <!-- <td><%= users[i]['is_online'] ? 'Yes' : 'No' %></td> -->
+          </tr>
+        <% } %>
+      <% } else { %>
+        <tr>
+          <td colspan="6" class="no-data">No users found.</td>
+        </tr>
+      <% } %>
+    </tbody>
+  </table>
+</body>
+
+</html>
+<%- include("layout/footer.ejs"); %>

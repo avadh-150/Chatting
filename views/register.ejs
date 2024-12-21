@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Craete Account</title>
+  <!-- Bootstrap core CSS -->
+  <link href="dist/css/lib/bootstrap.min.css" type="text/css" rel="stylesheet">
+  <!-- Swipe core CSS -->
+  <link href="dist/css/swipe.min.css" type="text/css" rel="stylesheet">
+  <!-- Favicon -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+
+  <style>
+    #image {
+      padding-top: 15px;
+
+    }
+  </style>
+</head>
+
+<body class="start">
+  <main>
+    <div class="layout">
+      <!-- Start of Sign Up -->
+      <div class="main order-md-2">
+        <div class="start">
+          <div class="container">
+            <div class="col-md-12">
+              <div class="content">
+                <h1>Create Account</h1>
+                <p>or use your email for registration:</p>
+                <form class="signup" action="" method="POST" enctype="multipart/form-data">
+
+                  <div class="form-parent">
+                    <!-- Name -->
+                    
+                    <!-- Email -->
+                    
+                    <div class="form-group">
+                        <input type="text" id="name" name="name" class="form-control" placeholder="Enter your name" required>
+                        <button class="btn icon"><i class="fa-regular fa-user"></i></button>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="email" class="form-control" name="email" placeholder="Enter your email" required>
+                        <button class="btn icon"><i class="fa-regular fa-envelope"></i></button>
+                    </div>
+                  </div>
+       
+     
+              <div class="form-group">
+                <input type="password" id="password"  class="form-control" name="password" placeholder="Enter your password" required>
+                <button class="btn icon"><i class="fa-solid fa-lock"></i></button>
+                </div>
+                <div class="form-group">
+                    <input type="file" id="image" class="form-control" name="pic" accept="image/*" required>
+                    <button class="btn icon"><i class="fa-solid fa-image"></i></button>
+                  </div>
+                  <button type="submit" class="btn button"> Create Account</button> <br><br>
+                  <br><br>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+     
+      <div class="aside order-md-1">
+        <div class="container">
+          <div class="col-md-12">
+            <div class="preference">
+              <h2>Welcome Back!</h2>
+              <p>To keep connected with your friends please login with your personal info.</p>
+              <a href="/" class="btn button">Login</a>
+            </div>
+          </div>
+        </div> 
+      </div>
+      <!-- End of Sidebar -->
+    </div> <!-- Layout -->
+  </main>
+</body>
+
+
+</html>

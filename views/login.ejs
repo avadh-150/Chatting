@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Login Page</title>
+  <!-- Bootstrap core CSS -->
+  <link href="dist/css/lib/bootstrap.min.css" type="text/css" rel="stylesheet">
+  <!-- Swipe core CSS -->
+  <link href="dist/css/swipe.min.css" type="text/css" rel="stylesheet">
+  <!-- Favicon -->
+  <!-- <link href="dist/img/favicon.png" type="image/png" rel="icon"> -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+
+</head>
+
+<body class="start">
+  <main>
+    <div class="layout">
+      <!-- Start of Sign In -->
+      <div class="main order-md-1">
+        <div class="start">
+          <div class="container">
+            <div class="col-md-12">
+              <div class="content">
+                <h1>Login</h1>
+                <% if (typeof message !== 'undefined') { %>
+                <p style="color: red;margin-top: 10px; padding: 5px;"><%= message %></p>
+                <% } %>
+                <p>or use your email account:</p>
+                <form action="" method="POST">
+                  <div class="form-group">
+                    <input type="email" id="email" name="email" class="form-control" placeholder="Enter your email" required >
+                    <button class="btn icon"><i class="fa-regular fa-envelope"></i></button>
+                  </div>
+                  <div class="form-group">
+					<input type="password" id="password" class="form-control" name="password" placeholder="Enter your password" required >
+                    <button class="btn icon"><i class="fa-solid fa-lock"></i></button>
+                  </div>
+                  <button type="submit" class="btn button">Login</button> <br><br>
+
+
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="aside order-md-2">
+        <div class="container">
+          <div class="col-md-12">
+            <div class="preference">
+              <h2>Hello, Friend!</h2>
+              <p>Enter your personal details and start your journey with This app today.</p>
+              <a href="/register" class="btn button">Registration</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+</body>
+
+</html>
